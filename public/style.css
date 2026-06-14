@@ -433,12 +433,14 @@ h1 { margin-bottom: 20px; font-size: 1.8em; color: #2d3436; font-weight: 700; }
 /* Навигация должна быть всегда прижата к низу */
 .chat-navigation {
     height: 60px;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     border-top: 1px solid #eee;
     background: white;
     flex-shrink: 0;
+    margin-bottom: 10px; /* Добавь этот отступ, чтобы опустить кнопки чуть ниже */
 }
 
 /* Полностью переписываем поведение профиля */
@@ -463,15 +465,24 @@ h1 { margin-bottom: 20px; font-size: 1.8em; color: #2d3436; font-weight: 700; }
     padding: 20px;
 }
 
+/* Убеждаемся, что навигация всегда видна */
 .chat-navigation {
-    height: 60px;
+    height: 70px;
     width: 100%;
-    display: flex;
+    display: flex !important; /* !important принудительно включает отображение */
     justify-content: space-around;
     align-items: center;
     border-top: 1px solid #eee;
     background: white;
-    flex-shrink: 0; /* Чтобы не сжималась */
+    flex-shrink: 0;
+    margin-top: auto; /* Прижимает навигацию к низу flex-контейнера */
+}
+
+/* Профиль должен использовать flex для распределения места */
+#profile-view {
+    display: none; 
+    flex-direction: column;
+    height: 100%;
 }
 
 /* Выравнивание содержимого профиля */
