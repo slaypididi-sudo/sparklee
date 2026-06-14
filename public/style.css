@@ -12,24 +12,22 @@ body {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    min-height: 100vh; 
+    min-height: 100dvh; /* Используем всю высоту экрана */
     background: #f4f4f9; 
-    font-family: 'Segoe UI', 'SF Pro Display', -apple-system, Tahoma, Geneva, Verdana, sans-serif; 
-    width: 100vw;
-    height: 100dvh;
+    font-family: 'Segoe UI', 'SF Pro Display', sans-serif; 
+    margin: 0;
+    overflow: hidden; /* Чтобы не было прокрутки всей страницы */
 }
 
 .container { 
     background: white; 
-    padding: 0; 
-    border-radius: 25px; 
-    text-align: center; 
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
-    width: 400px; 
-    height: 650px; 
+    width: 100vw;    /* Ширина на 100% экрана */
+    height: 100dvh;  /* Высота на 100% экрана */
     display: flex; 
     flex-direction: column;
     overflow: hidden; 
+    box-shadow: none; /* Убираем тень, так как контейнер теперь во весь экран */
+    border-radius: 0; /* Убираем скругления, чтобы было как в настоящем приложении */
 }
 
 /* =========================================
