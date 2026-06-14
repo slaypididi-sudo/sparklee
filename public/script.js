@@ -108,39 +108,23 @@ function completeRegistration() {
    ПРОФИЛЬ (Очищенная версия)
    ========================================= */
 
+// Переключение на чаты
+function openChats() {
+    document.getElementById('profile-view').style.display = 'none';
+    document.getElementById('chat-view').style.display = 'flex';
+    document.querySelector('.chat-navigation').style.display = 'flex';
+}
+
+// Переключение на профиль
 function openProfile() {
-    // 1. Переключение экранов
     document.getElementById('chat-view').style.display = 'none';
     document.getElementById('profile-view').style.display = 'flex';
-    
-    // 2. Получение данных из localStorage
+    // Загружаем данные пользователя
     const activeNumber = localStorage.getItem('active_session_full_number');
-    const username = localStorage.getItem('user_name_for_' + activeNumber) || "SparkleUser";
-    
-    console.log("Opening profile for: " + activeNumber);
-    
-    // 3. Загрузка аватарки (вызываем вашу функцию)
-    loadAvatar(); 
-    
-    // 4. Обновление текста (безопасная проверка элементов)
-    const nameLabel = document.getElementById('user-display-name');
-    if (nameLabel) nameLabel.innerText = username;
-    
-    const idLabel = document.getElementById('user-display-id');
-    if (idLabel) idLabel.innerText = "Sparkle ID: " + username;
-    
-    const phoneLabel = document.getElementById('user-phone-display');
-    if (phoneLabel) phoneLabel.innerText = activeNumber || "N/A";
-}
-
-function openChats() {
-    document.getElementById('profile-view').style.display = 'none';
-    document.getElementById('chat-view').style.display = 'flex';
-}
-
-function openChats() {
-    document.getElementById('profile-view').style.display = 'none';
-    document.getElementById('chat-view').style.display = 'flex';
+    document.getElementById('user-display-name').innerText = localStorage.getItem('user_name_for_' + activeNumber);
+    document.getElementById('user-display-id').innerText = "ID: " + localStorage.getItem('user_id_for_' + activeNumber);
+    document.getElementById('user-phone-display').innerText = activeNumber;
+    loadAvatar();
 }
 
 /* =========================================
