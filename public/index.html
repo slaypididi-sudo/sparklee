@@ -58,27 +58,25 @@
                     </div>
 
 <div id="profile-view" style="display: none; flex-direction: column; height: 100%;">
-    <div class="profile-content">
+    <div class="profile-content" style="display: flex; flex-direction: column; align-items: center; padding: 20px;">
         <img src="placeholder.webp" alt="Avatar" class="profile-avatar-main">
-            <div class="username-edit-block" id="username-display-wrapper">
-                <span id="user-display-name" class="user-name-label"></span>
-                 <button class="edit-username-btn" onclick="enableUsernameEditing()">
-                    <img src="edit.webp" alt="Edit" class="edit-icon">
-                </button>
-             </div>
-            <div class="username-input-wrapper" id="username-edit-input-wrapper" style="display: none;">
-                <input type="text" id="username-new-val" class="username-edit-input" placeholder="Min 4, Max 11">
-            </div>
-            <span id="user-display-id" class="user-id-label">ID: 0000</span>
-            <span id="user-phone-display" class="user-id-label"></span>
-        </div>
+        
+        <div class="profile-info-center" style="display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 15px;">
             
-    <button class="settings-main-btn">Settings</button>
-
- <div class="chat-navigation">
-    <button class="nav-btn" onclick="openChats()"><img src="chats.png" alt="Chats"></button>
-    <button class="nav-btn" onclick="openProfile()"><img src="profile.webp" alt="Profile"></button>
+            <div class="username-display-wrapper" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 10px;">
+                <span id="user-display-name" style="font-weight: bold; font-size: 1.2em;"></span>
+                <button class="edit-username-btn" onclick="enableUsernameEditing()" style="background: none; border: none; cursor: pointer; display: flex; align-items: center;">
+                    <img src="edit.webp" alt="Edit" style="width: 20px; height: 20px;">
+                </button>
             </div>
+
+            <span id="user-display-id" style="margin-top: 5px; color: #555;">ID: 0000</span>
+            <span id="user-phone-display" style="margin-top: 5px; color: #888;"></span>
+        </div>
+    </div>
+    
+    <button class="settings-main-btn">Settings</button>
+    </div>
         </div>
     </div>
 
