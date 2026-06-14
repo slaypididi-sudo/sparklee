@@ -1,0 +1,393 @@
+/* =========================================
+   GLOBAL RESET & BASIC STYLES
+   ========================================= */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    -webkit-tap-highlight-color: transparent; /* Mobile friendly highlights */
+}
+
+body { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+    background: #f4f4f9; 
+    font-family: 'Segoe UI', 'SF Pro Display', -apple-system, Tahoma, Geneva, Verdana, sans-serif; 
+    width: 100vw;
+    height: 100dvh;
+}
+
+.container { 
+    background: white; 
+    padding: 0; 
+    border-radius: 25px; 
+    text-align: center; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
+    width: 400px; 
+    height: 650px; 
+    display: flex; 
+    flex-direction: column;
+    overflow: hidden; 
+}
+
+/* =========================================
+   LOGIN & VERIFICATION STYLES (EXTENDED)
+   ========================================= */
+
+#login-view, #verify-view {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.welcome-img { 
+    width: 100%; 
+    height: 180px; 
+    object-fit: contain; 
+    margin-bottom: 20px; 
+}
+
+h1 { margin-bottom: 20px; font-size: 1.8em; color: #2d3436; font-weight: 700; }
+.sparkle-title { font-weight: 800; color: #3a3f51; }
+
+.input-group { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px; 
+    margin-bottom: 15px; 
+    width: 100%; 
+}
+
+.code-input-wrapper { 
+    display: flex; 
+    align-items: center; 
+    border: 2px solid #333; 
+    border-radius: 12px; 
+    padding: 0 12px; 
+    width: 80px; 
+    height: 55px; 
+}
+
+.plus-sign { font-weight: bold; font-size: 1.1em; color: #333; margin-right: 5px; }
+
+#countryCode { border: none; outline: none; width: 100%; height: 100%; font-size: 1.1em; color: #333; }
+
+#phone { 
+    border: 2px solid #333; 
+    border-radius: 12px; 
+    padding: 12px; 
+    width: 220px; 
+    height: 55px; 
+    font-size: 1.1em; 
+    outline: none;
+    color: #333;
+}
+
+#countryInfo { height: 30px; margin-bottom: 10px; font-weight: bold; color: #636e72; }
+
+.error-hidden { display: none; }
+.error-visible { display: block; color: #d63031; margin-bottom: 15px; font-weight: bold; font-size: 0.9em; }
+
+.signup-btn { 
+    background: #ff286f; 
+    color: white; 
+    border: none; 
+    padding: 18px; 
+    border-radius: 12px; 
+    cursor: pointer; 
+    width: 310px; 
+    margin: 0 auto; 
+    font-size: 1.1em; 
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 40, 111, 0.25);
+    transition: background 0.3s ease;
+}
+.signup-btn:hover { background: hsl(340, 100%, 55%); }
+
+/* =========================================
+   VERIFICATION CODE STYLES (EXTENDED)
+   ========================================= */
+.code-group { display: flex; justify-content: center; gap: 12px; margin-top: 30px; }
+.code-digit { 
+    width: 50px; 
+    height: 65px; 
+    text-align: center; 
+    font-size: 28px; 
+    border: 2px solid #333; 
+    border-radius: 12px; 
+    outline: none;
+}
+
+/* =========================================
+   CHAT & PROFILE VIEW LAYOUTS (EXTENDED)
+   ========================================= */
+#chat-view, #profile-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.chat-header { 
+    height: 60px; 
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    flex-shrink: 0;
+}
+
+.header-logo { 
+    font-size: 1.3em; 
+    font-weight: 800; 
+    color: hsl(320, 78%, 49%); 
+    letter-spacing: -0.5px;
+}
+
+.chat-body, .profile-content { 
+    flex-grow: 1; 
+    background: #f9f9fb; 
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-body {
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-msg { color: #b2bec3; font-size: 0.9em; }
+
+/* =========================================
+   PROFILE VIEW STYLES (NEW LOGIC)
+   ========================================= */
+.profile-content {
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.profile-user-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.profile-avatar-main {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ff286f;
+    flex-shrink: 0;
+}
+
+.profile-info-text {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* --- Username Edit Styles --- */
+.username-edit-block {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.user-name-label {
+    font-weight: 700;
+    font-size: 1.25em;
+    color: #2d3436;
+    margin-right: 8px;
+    flex-grow: 1;
+}
+
+.edit-username-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+}
+.edit-username-btn:hover { opacity: 1; }
+
+.edit-icon {
+    width: 18px; 
+    height: 18px; 
+    object-fit: contain;
+}
+
+/* --- Username Input Edit Mode Styles --- */
+.username-input-wrapper {
+    width: 100%;
+    display: none; /* Controlled by JS */
+}
+
+.username-edit-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #ff286f;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    color: #2d3436;
+    outline: none;
+    margin-bottom: 5px;
+}
+
+/* ID text */
+.user-id-label {
+    font-weight: 600;
+    font-size: 0.9em;
+    color: #636e72;
+    margin-top: 2px;
+}
+
+/* --- Number section in profile --- */
+.number-section {
+    margin-top: 15px;
+    width: 100%;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.number-row {
+    font-size: 0.95em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.number-label {
+    font-weight: 700;
+    color: #b2bec3;
+    margin-right: 8px;
+}
+
+.number-value {
+    font-weight: 600;
+    color: #2d3436;
+}
+
+/* --- Settings Button --- */
+.settings-main-btn {
+    width: 100%;
+    background: white;
+    border: 2px solid #eee;
+    padding: 15px;
+    border-radius: 15px;
+    font-weight: 600;
+    color: #2d3436;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+.settings-main-btn:hover { background: #f1f1f1; }
+
+/* =========================================
+   NAVIGATION STYLES (EXTENDED)
+   ========================================= */
+.chat-navigation { 
+    height: 70px; 
+    background: #ffffff; 
+    border-top: 1px solid #eee; 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.nav-btn img {
+    width: 32px; 
+    height: 32px;
+    object-fit: contain;
+}
+.nav-btn:hover { transform: scale(1.05); }
+
+/* Единый стиль для верхней панели */
+.chat-header { 
+    height: 60px; 
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center; 
+    padding: 0 20px;
+    gap: 20px; 
+    flex-shrink: 0;
+}
+
+.header-logo { 
+    font-size: 1.3em; 
+    font-weight: 800; 
+    color: hsl(320, 78%, 49%);
+    flex-shrink: 0; /* Чтобы логотип не сжимался */
+}
+
+#input-search {
+    flex-grow: 1; /* Занимает всё свободное место справа */
+    padding: 8px 12px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    outline: none;
+    background: #f9f9fb;
+}
+
+.no-results {
+    color: #888;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 14px;
+    padding: 20px;
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px; /* Отступ от краев */
+    gap: 15px;      /* Расстояние между карточкой и кнопкой настроек */
+}
+
+.profile-user-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px; /* Отступ от верхней панели */
+}

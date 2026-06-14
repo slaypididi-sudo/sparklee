@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Sparkle">
+    <title>Sparkle Messenger</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+</head>
+<body>
+    <div class="container" id="app">
+        
+        <div id="login-view">
+            <img src="welcome.jpg" alt="Welcome" class="welcome-img">
+            <h1 class="sparkle-title">Welcome to Sparkle</h1>
+            <div class="input-group">
+                <div class="code-input-wrapper">
+                    <span class="plus-sign">+</span>
+                    <input type="text" id="countryCode" placeholder="7" maxlength="4">
+                </div>
+                <input type="tel" id="phone" placeholder="Phone Number" maxlength="12">
+            </div>
+            <div id="countryInfo"></div>
+            <div id="error-message" style="display:none; color:red; margin:10px;">Number is incorrect</div>
+            <button class="signup-btn" onclick="validateAndProceed()">Sign Up</button>
+        </div>
+
+        <div id="verify-view" style="display: none;">
+            <img src="2go.svg" alt="Verification" class="welcome-img">
+            <h1>Verification</h1>
+            <p id="phone-info"></p>
+            <div class="code-group" id="code-inputs">
+                <input type="number" class="code-digit" maxlength="1" oninput="handleCodeInput(this)">
+                <input type="number" class="code-digit" maxlength="1" oninput="handleCodeInput(this)">
+                <input type="number" class="code-digit" maxlength="1" oninput="handleCodeInput(this)">
+                <input type="number" class="code-digit" maxlength="1" oninput="handleCodeInput(this)">
+                <input type="number" class="code-digit" maxlength="1" oninput="handleCodeInput(this)">
+            </div>
+        </div>
+
+        <div id="chat-view" style="display: none;">
+<div id="chat-view" style="display: flex; flex-direction: column; height: 100%;">
+    <div class="chat-header">
+        <span class="header-logo">Sparkle</span>
+        <input type="text" id="input-search" placeholder="Search user by sparkle-id">
+    </div>
+    <div id="search-results-list"></div>
+
+    <div id="main-chat-content" class="content">
+        </div>
+
+    <div id="search-menu" style="display: none; flex-direction: column; flex-grow: 1; background: white;">
+        <div id="search-results-list"></div>
+    </div>
+
+            <div class="chat-body"><p>No messages here yet...</p></div>
+            <div class="chat-navigation">
+                <button class="nav-btn" onclick="openChats()"><img src="chats.png" alt="Chats"></button>
+                <button class="nav-btn" onclick="openProfile()"><img src="profile.webp" alt="Profile"></button>
+            </div>
+        </div>
+
+        <div id="profile-view" style="display: none;">
+            <div class="chat-header"><span class="header-logo">Sparkle</span></div>
+            <div class="profile-content">
+                <div class="profile-user-card">
+                    <img src="placeholder.webp" alt="Avatar" class="profile-avatar-main">
+<input type="file" id="avatar-upload" accept="image/*" style="display: none;">
+                    <div class="profile-info-text">
+                        <div class="profile-info-text">
+    <span id="user-display-id" class="user-id-label">ID: 0000</span>
+    <span id="user-phone-display" class="user-id-label" style="display: block; margin-top: 5px; color: #888;"></span>
+</div>
+                        
+                        <div class="username-edit-block" id="username-display-wrapper">
+                            <span id="user-display-name" class="user-name-label"></span>
+                            <button class="edit-username-btn" onclick="enableUsernameEditing()">
+                                <img src="edit.webp" alt="Edit" class="edit-icon">
+                            </button>
+                        </div>
+                        
+                        <div class="username-input-wrapper" id="username-edit-input-wrapper" style="display: none;">
+                            <input type="text" id="username-new-val" class="username-edit-input" placeholder="Min 4, Max 11">
+                        </div>
+
+                        <span id="user-display-id" class="user-id-label">ID: 0000</span>
+                    </div>
+                </div>
+                
+                <button class="settings-main-btn">Settings</button>
+            </div>
+
+            <div class="chat-navigation">
+                <button class="nav-btn" onclick="openChats()"><img src="chats.png" alt="Chats"></button>
+                <button class="nav-btn" onclick="openProfile()"><img src="profile.webp" alt="Profile"></button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
