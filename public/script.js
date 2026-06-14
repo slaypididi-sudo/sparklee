@@ -1,3 +1,26 @@
+const socket = io(); // Убедись, что socket объявлен один раз
+
+// ПРОВЕРКА ПРИ ЗАГРУЗКЕ
+window.addEventListener('load', () => {
+    const savedToken = localStorage.getItem('sessionToken');
+    if (savedToken) {
+        socket.emit('check_session', savedToken);
+    }
+});
+
+// СЛУШАЕМ ОТВЕТ СЕРВЕРА
+socket.on('auth_success', (userData) => {
+    // Сохраняем токен, чтобы в следующий раз зайти автоматически
+    localStorage.setItem('sessionToken', userData.sessionToken);
+    
+    // Переключаем экраны
+    document.getElementById('login-view').style.display = 'none';
+    document.getElementById('chat-view').style.display = 'flex';
+    
+    // Заполняем профиль данными из userData
+    document.getElementById('user-display-name').innerText = userData.username;
+});
+
 /* =========================================
    COUNTRY DATABASE (EXTENDED FOR DEV-LAND)
    ========================================= */
