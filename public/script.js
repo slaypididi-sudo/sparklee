@@ -1,6 +1,6 @@
-const socket = io(); // Убедись, что socket объявлен один раз
+const socket = io();
 
-// ПРОВЕРКА ПРИ ЗАГРУЗКЕ
+// АВТО-ВХОД ПРИ ЗАГРУЗКЕ
 window.addEventListener('load', () => {
     const savedToken = localStorage.getItem('sessionToken');
     if (savedToken) {
@@ -8,22 +8,18 @@ window.addEventListener('load', () => {
     }
 });
 
-// СЛУШАЕМ ОТВЕТ СЕРВЕРА
+// ОБРАБОТКА УСПЕШНОГО ВХОДА
 socket.on('auth_success', (userData) => {
-    // Сохраняем токен, чтобы в следующий раз зайти автоматически
     localStorage.setItem('sessionToken', userData.sessionToken);
+    localStorage.setItem('active_session_full_number', userData.phone);
     
-    // Переключаем экраны
     document.getElementById('login-view').style.display = 'none';
-    document.getElementById('chat-view').style.display = 'flex';
+    // Добавь здесь ID элемента твоего чата, если он другой
+    document.getElementById('chat-view').style.display = 'flex'; 
     
-    // Заполняем профиль данными из userData
     document.getElementById('user-display-name').innerText = userData.username;
 });
 
-/* =========================================
-   COUNTRY DATABASE (EXTENDED FOR DEV-LAND)
-   ========================================= */
 const countriesDatabase = {
     "0": { name: "DEV-Land (Anachya)", type: "sticker", icon: "rocket" },
     "7": { name: "Russia", type: "flag", icon: "ru" },
@@ -155,18 +151,28 @@ function openProfile() {
    ========================================= */
 
 function enableUsernameEditing() {
+    console.log("Username editing mode enabled.");
+    
+    // Swap Displays
     const displayWrapper = document.getElementById('username-display-wrapper');
     const inputWrapper = document.getElementById('username-edit-input-wrapper');
     const inputField = document.getElementById('username-new-val');
-    const currentName = document.getElementById('user-display-name').innerText;
-
-    // Скрываем отображение
-    displayWrapper.style.display = 'none';
     
-    // Показываем поле ввода
-    inputWrapper.style.display = 'flex'; // Важно: flex, чтобы блок появился
-    inputField.value = currentName;      // Вставляем текущее имя в поле
-    inputField.focus();                  // Ставим курсор сразу в поле
+    displayWrapper.style.display = 'none';
+    inputWrapper.style.display = 'flex';
+    inputWrapper.style.flexDirection = 'column';
+    
+    // Set current username in the input field
+    const activeNumber = localStorage.getItem('active_session_full_number');
+    const currentUsername = localStorage.getItem('user_name_for_' + activeNumber);
+    inputField.value = currentUsername;
+    
+    // Add Click listener for confirmations and blur for cancel/confirm
+    inputField.addEventListener('blur', finalizeUsernameChangeOnBlur);
+    inputField.addEventListener('keydown', finalizeUsernameChangeOnEnter);
+    
+    // Auto focus the field
+    inputField.focus();
 }
 
 function finalizeUsernameChangeOnEnter(event) {
@@ -305,19 +311,5 @@ searchInput.addEventListener('input', (e) => {
 document.addEventListener('click', (e) => {
     if (searchInput && !searchInput.contains(e.target) && navPanel) {
         navPanel.style.display = 'flex';
-    }
-});
-
-document.getElementById('username-new-val').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        const newName = this.value;
-        document.getElementById('user-display-name').innerText = newName;
-        
-        // Возвращаем вид обратно
-        document.getElementById('username-display-wrapper').style.display = 'flex';
-        document.getElementById('username-edit-input-wrapper').style.display = 'none';
-        
-        // Здесь можно добавить сохранение в localStorage
-        localStorage.setItem('user_name', newName);
     }
 });
