@@ -32,19 +32,45 @@ let allRegisteredUsers = loadUsers();
 io.on('connection', (socket) => {
     console.log('[LOG] Клиент подключился:', socket.id);
 
-    // РЕГИСТРАЦИЯ
+    // 1. РЕГИСТРАЦИЯ
     socket.on('user_registered', (userData) => {
         if (!allRegisteredUsers.find(u => u.phone === userData.phone)) {
             userData.sessionToken = Math.random().toString(36).substr(2) + Date.now();
             allRegisteredUsers.push(userData);
             saveUsers(allRegisteredUsers);
             
+            // Вывод при регистрации
             console.log(`Зарегестрирован пользователь ${userData.phone} юзернейм ${userData.username}`);
-            logAllUsers(allRegisteredUsers); // Вызываем логи
+            
+            // ВЫЗОВ ФУНКЦИИ ДЛЯ СПИСКА ВСЕХ
+            logAllUsers(); 
             
             socket.emit('auth_success', userData);
         }
     });
+
+    // 3. ОБНОВЛЕНИЕ ЮЗЕРНЕЙМА
+    socket.on('update_username', (data) => {
+        const user = allRegisteredUsers.find(u => u.phone === data.phone);
+        if (user) {
+            user.username = data.newName;
+            saveUsers(allRegisteredUsers);
+            
+            console.log(`Имя изменено: ${data.newName}`);
+            
+            // ВЫЗОВ ФУНКЦИИ ДЛЯ СПИСКА ВСЕХ
+            logAllUsers(); 
+            
+            socket.emit('update_success', { newName: data.newName });
+        }
+    });
+});
+
+// Убедись, что функция logAllUsers определена ВНЕ io.on
+function logAllUsers() {
+    const list = allRegisteredUsers.map(u => `+${u.phone} юз ${u.username}`).join(", ");
+    console.log("Все пользователи: " + list);
+}
 
     // ОБНОВЛЕНИЕ ЮЗЕРНЕЙМА
     socket.on('update_username', (data) => {
