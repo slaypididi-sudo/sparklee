@@ -29,26 +29,31 @@ function logAllUsers(usersArray) {
 
 let allRegisteredUsers = loadUsers();
 
+// ... твой код выше ...
+
 io.on('connection', (socket) => {
     console.log('[LOG] Клиент подключился:', socket.id);
 
-    // 1. РЕГИСТРАЦИЯ
     socket.on('user_registered', (userData) => {
-        if (!allRegisteredUsers.find(u => u.phone === userData.phone)) {
-            userData.sessionToken = Math.random().toString(36).substr(2) + Date.now();
-            allRegisteredUsers.push(userData);
-            saveUsers(allRegisteredUsers);
-            
-            // Вывод при регистрации
-            console.log(`Зарегестрирован пользователь ${userData.phone} юзернейм ${userData.username}`);
-            
-            // ВЫЗОВ ФУНКЦИИ ДЛЯ СПИСКА ВСЕХ
-            logAllUsers(); 
-            
-            socket.emit('auth_success', userData);
-        }
+        // ... логика регистрации ...
+        logAllUsers(); // Вызов
     });
 
+    socket.on('update_username', (data) => {
+        // ... логика обновления ...
+        logAllUsers(); // Вызов
+    });
+}); // <--- ЭТО закрывает io.on('connection', ...)
+
+// ФУНКЦИЯ ДОЛЖНА БЫТЬ ВНЕ io.on
+function logAllUsers() {
+    const list = allRegisteredUsers.map(u => `+${u.phone} юз ${u.username}`).join(", ");
+    console.log("Все пользователи: " + list);
+} // <--- ЭТО закрывает функцию logAllUsers
+
+// Убедись, что в конце файла НЕТ лишних символов
+const PORT = process.env.PORT || 10000;
+server.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));
     // 3. ОБНОВЛЕНИЕ ЮЗЕРНЕЙМА
     socket.on('update_username', (data) => {
         const user = allRegisteredUsers.find(u => u.phone === data.phone);
