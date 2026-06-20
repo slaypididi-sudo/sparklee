@@ -22,7 +22,7 @@ function saveUsers(users) {
     fs.writeFileSync(DB_FILE, JSON.stringify(users, null, 2));
 }
 
-// Глобальная функция для вывода логов
+// Глобальная функция для вывода логов (именно то, что ты просил)
 function logAllUsers() {
     const list = allRegisteredUsers.map(u => `+${u.phone} юз ${u.username}`).join(", ");
     console.log("Все пользователи: " + list);
@@ -33,21 +33,21 @@ let allRegisteredUsers = loadUsers();
 io.on('connection', (socket) => {
     console.log('[LOG] Клиент подключился:', socket.id);
 
-    // РЕГИСТРАЦИЯ
+    // 1. РЕГИСТРАЦИЯ
     socket.on('user_registered', (userData) => {
         if (!allRegisteredUsers.find(u => u.phone === userData.phone)) {
             userData.sessionToken = Math.random().toString(36).substr(2) + Date.now();
             allRegisteredUsers.push(userData);
             saveUsers(allRegisteredUsers);
             
-            console.log(`Зарегестрирован пользователь ${userData.phone} юзернейм ${userData.username}`);
-            logAllUsers(); // Вызываем лог
+            console.log(`Зарегестрирован пользователь +${userData.phone} юзернейм ${userData.username}`);
+            logAllUsers(); // Выводим актуальный список
             
             socket.emit('auth_success', userData);
         }
     });
 
-    // ПРОВЕРКА СЕССИИ
+    // 2. ПРОВЕРКА СЕССИИ (авто-вход)
     socket.on('check_session', (token) => {
         const user = allRegisteredUsers.find(u => u.sessionToken === token);
         if (user) {
@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
         }
     });
 
-    // ОБНОВЛЕНИЕ ЮЗЕРНЕЙМА
+    // 3. ОБНОВЛЕНИЕ ЮЗЕРНЕЙМА
     socket.on('update_username', (data) => {
         const user = allRegisteredUsers.find(u => u.phone === data.phone);
         if (user) {
@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
             saveUsers(allRegisteredUsers);
             
             console.log(`Имя изменено: ${data.newName}`);
-            logAllUsers(); // Вызываем лог
+            logAllUsers(); // Выводим актуальный список
             
             socket.emit('update_success', { newName: data.newName });
         }
