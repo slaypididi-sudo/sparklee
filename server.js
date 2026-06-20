@@ -21,9 +21,9 @@ function saveUsers(users) {
     fs.writeFileSync(DB_FILE, JSON.stringify(users, null, 2));
 }
 
-// ЭТА ФУНКЦИЯ ДОЛЖНА БЫТЬ ВНЕ io.on
-function logAllUsers() {
-    const list = allRegisteredUsers.map(u => `+${u.phone} юз ${u.username}`).join(", ");
+// 1. ВЫНОСИМ ФУНКЦИЮ ВНЕ IO.ON
+function logAllUsers(usersArray) {
+    const list = usersArray.map(u => `+${u.phone} юз ${u.username}`).join(", ");
     console.log("Все пользователи: " + list);
 }
 
@@ -32,7 +32,7 @@ let allRegisteredUsers = loadUsers();
 io.on('connection', (socket) => {
     console.log('[LOG] Клиент подключился:', socket.id);
 
-    // 1. РЕГИСТРАЦИЯ
+    // РЕГИСТРАЦИЯ
     socket.on('user_registered', (userData) => {
         if (!allRegisteredUsers.find(u => u.phone === userData.phone)) {
             userData.sessionToken = Math.random().toString(36).substr(2) + Date.now();
@@ -40,13 +40,13 @@ io.on('connection', (socket) => {
             saveUsers(allRegisteredUsers);
             
             console.log(`Зарегестрирован пользователь ${userData.phone} юзернейм ${userData.username}`);
-            logAllUsers(); // Выводим актуальный список
+            logAllUsers(allRegisteredUsers); // Вызываем логи
             
             socket.emit('auth_success', userData);
         }
     });
 
-    // 3. ОБНОВЛЕНИЕ ЮЗЕРНЕЙМА
+    // ОБНОВЛЕНИЕ ЮЗЕРНЕЙМА
     socket.on('update_username', (data) => {
         const user = allRegisteredUsers.find(u => u.phone === data.phone);
         if (user) {
@@ -54,12 +54,12 @@ io.on('connection', (socket) => {
             saveUsers(allRegisteredUsers);
             
             console.log(`[LOG] Имя изменено: ${data.newName}`);
-            logAllUsers(); // Выводим актуальный список после изменения
+            logAllUsers(allRegisteredUsers); // Вызываем логи
             
-            socket.emit('update_success', user);
+            socket.emit('username_updated', { newName: data.newName });
         }
     });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 server.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));
