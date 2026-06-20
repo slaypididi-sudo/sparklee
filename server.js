@@ -11,7 +11,6 @@ const DB_FILE = path.join(__dirname, 'users.json');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Функции работы с базой
 function loadUsers() {
     if (!fs.existsSync(DB_FILE)) return [];
     try { return JSON.parse(fs.readFileSync(DB_FILE, 'utf8')); } 
@@ -22,7 +21,7 @@ function saveUsers(users) {
     fs.writeFileSync(DB_FILE, JSON.stringify(users, null, 2));
 }
 
-// Глобальная функция для вывода логов (именно то, что ты просил)
+// 1. ВЫНОСИМ ФУНКЦИЮ НАРУЖУ (глобально)
 function logAllUsers() {
     const list = allRegisteredUsers.map(u => `+${u.phone} юз ${u.username}`).join(", ");
     console.log("Все пользователи: " + list);
@@ -41,19 +40,11 @@ io.on('connection', (socket) => {
             saveUsers(allRegisteredUsers);
             
             console.log(`Зарегестрирован пользователь +${userData.phone} юзернейм ${userData.username}`);
-            logAllUsers(); // Выводим актуальный список
+            
+            // 2. ВЫЗЫВАЕМ ФУНКЦИЮ ЛОГОВ ЗДЕСЬ
+            logAllUsers(); 
             
             socket.emit('auth_success', userData);
-        }
-    });
-
-    // 2. ПРОВЕРКА СЕССИИ (авто-вход)
-    socket.on('check_session', (token) => {
-        const user = allRegisteredUsers.find(u => u.sessionToken === token);
-        if (user) {
-            socket.emit('auth_success', user);
-        } else {
-            socket.emit('auth_required');
         }
     });
 
@@ -65,7 +56,9 @@ io.on('connection', (socket) => {
             saveUsers(allRegisteredUsers);
             
             console.log(`Имя изменено: ${data.newName}`);
-            logAllUsers(); // Выводим актуальный список
+            
+            // 2. ВЫЗЫВАЕМ ФУНКЦИЮ ЛОГОВ ЗДЕСЬ ТОЖЕ
+            logAllUsers(); 
             
             socket.emit('update_success', { newName: data.newName });
         }
