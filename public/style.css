@@ -1,0 +1,2484 @@
+/* =========================================
+   GLOBAL RESET & BASIC STYLES
+   ========================================= */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    -webkit-tap-highlight-color: transparent; /* Mobile friendly highlights */
+}
+
+body { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100dvh; /* Используем всю высоту экрана */
+    background: #f4f4f9; 
+    font-family: 'Segoe UI', 'SF Pro Display', sans-serif; 
+    margin: 0;
+    overflow: hidden; /* Чтобы не было прокрутки всей страницы */
+}
+
+.container { 
+    background: white; 
+    width: 100vw;    /* Ширина на 100% экрана */
+    height: 100dvh;  /* Высота на 100% экрана */
+    display: flex; 
+    flex-direction: column;
+    overflow: hidden; 
+    box-shadow: none; /* Убираем тень, так как контейнер теперь во весь экран */
+    border-radius: 0; /* Убираем скругления, чтобы было как в настоящем приложении */
+}
+
+/* =========================================
+   LOGIN & VERIFICATION STYLES (EXTENDED)
+   ========================================= */
+
+#login-view, #verify-view {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.welcome-img { 
+    width: 100%; 
+    height: 180px; 
+    object-fit: contain; 
+    margin-bottom: 20px; 
+}
+
+h1 { margin-bottom: 20px; font-size: 1.8em; color: #2d3436; font-weight: 700; }
+.sparkle-title { font-weight: 800; color: #3a3f51; }
+
+.input-group { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px; 
+    margin-bottom: 15px; 
+    width: 100%; 
+}
+
+.code-input-wrapper { 
+    display: flex; 
+    align-items: center; 
+    border: 2px solid #333; 
+    border-radius: 12px; 
+    padding: 0 12px; 
+    width: 80px; 
+    height: 55px; 
+}
+
+.plus-sign { font-weight: bold; font-size: 1.1em; color: #333; margin-right: 5px; }
+
+#countryCode { border: none; outline: none; width: 100%; height: 100%; font-size: 1.1em; color: #333; }
+
+#phone { 
+    border: 2px solid #333; 
+    border-radius: 12px; 
+    padding: 12px; 
+    width: 220px; 
+    height: 55px; 
+    font-size: 1.1em; 
+    outline: none;
+    color: #333;
+}
+
+#countryInfo { height: 30px; margin-bottom: 10px; font-weight: bold; color: #636e72; }
+
+.error-hidden { display: none; }
+.error-visible { display: block; color: #d63031; margin-bottom: 15px; font-weight: bold; font-size: 0.9em; }
+
+.signup-btn { 
+    background: #ff286f; 
+    color: white; 
+    border: none; 
+    padding: 18px; 
+    border-radius: 12px; 
+    cursor: pointer; 
+    width: 310px; 
+    margin: 0 auto; 
+    font-size: 1.1em; 
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 40, 111, 0.25);
+    transition: background 0.3s ease;
+}
+.signup-btn:hover { background: hsl(340, 100%, 55%); }
+
+/* =========================================
+   VERIFICATION CODE STYLES (EXTENDED)
+   ========================================= */
+.code-group { display: flex; justify-content: center; gap: 12px; margin-top: 30px; }
+.code-digit { 
+    width: 50px; 
+    height: 65px; 
+    text-align: center; 
+    font-size: 28px; 
+    border: 2px solid #333; 
+    border-radius: 12px; 
+    outline: none;
+}
+
+/* =========================================
+   CHAT & PROFILE VIEW LAYOUTS (EXTENDED)
+   ========================================= */
+#chat-view, #profile-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.chat-header { 
+    height: 60px; 
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    flex-shrink: 0;
+}
+
+.header-logo { 
+    font-size: 1.3em; 
+    font-weight: 800; 
+    color: hsl(320, 78%, 49%); 
+    letter-spacing: -0.5px;
+}
+
+.chat-body, .profile-content { 
+    flex-grow: 1; 
+    background: #f9f9fb; 
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-body {
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-msg { color: #b2bec3; font-size: 0.9em; }
+
+/* =========================================
+   PROFILE VIEW STYLES (NEW LOGIC)
+   ========================================= */
+.profile-content {
+    flex-grow: 1; /* Обязательно! Заставляет блок занимать всё свободное место */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Чтобы длинные профили прокручивались */
+}
+
+.profile-user-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.profile-avatar-main {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ff286f;
+    flex-shrink: 0;
+}
+
+.profile-info-text {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* --- Username Edit Styles --- */
+.username-edit-block {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.user-name-label {
+    font-weight: 700;
+    font-size: 1.25em;
+    color: #2d3436;
+    margin-right: 8px;
+    flex-grow: 1;
+}
+
+.edit-username-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+}
+.edit-username-btn:hover { opacity: 1; }
+
+.edit-icon {
+    width: 18px; 
+    height: 18px; 
+    object-fit: contain;
+}
+
+/* --- Username Input Edit Mode Styles --- */
+.username-input-wrapper {
+    width: 100%;
+    display: none; /* Controlled by JS */
+}
+
+.username-edit-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #ff286f;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    color: #2d3436;
+    outline: none;
+    margin-bottom: 5px;
+}
+
+/* ID text */
+.user-id-label {
+    font-weight: 600;
+    font-size: 0.9em;
+    color: #636e72;
+    margin-top: 2px;
+}
+
+/* --- Number section in profile --- */
+.number-section {
+    margin-top: 15px;
+    width: 100%;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.number-row {
+    font-size: 0.95em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.number-label {
+    font-weight: 700;
+    color: #b2bec3;
+    margin-right: 8px;
+}
+
+.number-value {
+    font-weight: 600;
+    color: #2d3436;
+}
+
+/* --- Settings Button --- */
+.settings-main-btn {
+    width: 100%;
+    background: white;
+    border: 2px solid #eee;
+    padding: 15px;
+    border-radius: 15px;
+    font-weight: 600;
+    color: #2d3436;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+.settings-main-btn:hover { background: #f1f1f1; }
+
+/* =========================================
+   NAVIGATION STYLES (EXTENDED)
+   ========================================= */
+.chat-navigation { 
+    height: 70px; 
+    background: #ffffff; 
+    border-top: 1px solid #eee; 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.nav-btn img {
+    width: 32px; 
+    height: 32px;
+    object-fit: contain;
+}
+.nav-btn:hover { transform: scale(1.05); }
+
+/* Единый стиль для верхней панели */
+.chat-header { 
+    height: 60px; 
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center; 
+    padding: 0 20px;
+    gap: 20px; 
+    flex-shrink: 0;
+}
+
+.header-logo { 
+    font-size: 1.3em; 
+    font-weight: 800; 
+    color: hsl(320, 78%, 49%);
+    flex-shrink: 0; /* Чтобы логотип не сжимался */
+}
+
+#input-search {
+    flex-grow: 1; /* Занимает всё свободное место справа */
+    padding: 8px 12px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    outline: none;
+    background: #f9f9fb;
+}
+
+.no-results {
+    color: #888;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 14px;
+    padding: 20px;
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px; /* Отступ от краев */
+    gap: 15px;      /* Расстояние между карточкой и кнопкой настроек */
+}
+
+.profile-user-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px; /* Отступ от верхней панели */
+}
+
+/* Исправление для всех view-блоков */
+#login-view, #verify-view, #chat-view, #profile-view {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    overflow: hidden; /* Общий стандарт для всех экранов */
+}
+
+/* Явное управление прокруткой контента */
+.profile-content, .chat-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* Улучшение для аватара */
+.profile-avatar-main {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Принудительное отображение профиля */
+#profile-view {
+    display: none; /* JS будет менять это на flex */
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+/* Контент профиля должен занять всё место, кроме навигации */
+.profile-content {
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+}
+
+/* Навигация должна быть всегда прижата к низу */
+.chat-navigation {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #eee;
+    background: white;
+    flex-shrink: 0;
+    margin-bottom: 10px; /* Добавь этот отступ, чтобы опустить кнопки чуть ниже */
+}
+
+/* Полностью переписываем поведение профиля */
+#profile-view {
+    display: none; /* Это состояние по умолчанию для JS */
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background: #ffffff; /* Убедись, что фон белый */
+    position: absolute; /* Чтобы профиль накладывался поверх чатов */
+    top: 0;
+    left: 0;
+    z-index: 999; /* Чтобы он всегда был сверху */
+}
+
+.profile-content {
+    flex: 1; 
+    overflow-y: auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Убеждаемся, что навигация всегда видна */
+.chat-navigation {
+    height: 70px;
+    width: 100%;
+    display: flex !important; /* !important принудительно включает отображение */
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #eee;
+    background: white;
+    flex-shrink: 0;
+    margin-top: auto; /* Прижимает навигацию к низу flex-контейнера */
+}
+
+/* Профиль должен использовать flex для распределения места */
+#profile-view {
+    display: none; 
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Выравнивание содержимого профиля */
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрирует всё внутри по горизонтали */
+    justify-content: flex-start;
+}
+
+/* Контейнер имени и кнопки */
+.username-display-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Отступ между именем и кнопкой */
+    margin-bottom: 5px;
+}
+
+/* Кнопка редактирования */
+.edit-username-btn {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+
+/* Стили для ID и Телефона */
+.user-id-label {
+    text-align: center;
+    font-size: 0.9em;
+}
+
+/* iOS-style Bottom Navigation */
+.ios-nav {
+    height: 70px;
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid #ddd;
+    backdrop-filter: blur(20px);
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    margin: 0 8px 8px 8px;
+}
+
+/* Full Screen Username Modal */
+.username-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 10000;
+    display: flex;
+    align-items: flex-end;
+}
+
+.modal-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-btn {
+    background: none;
+    border: none;
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.modal-btn.cancel {
+    color: #ff286f;
+}
+
+.modal-btn.save {
+    color: #ff286f;
+    font-weight: 700;
+}
+
+.modal-body {
+    background: white;
+    width: 100%;
+    height: calc(100% - 60px);
+    border-radius: 20px 20px 0 0;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.modal-body h2 {
+    color: #2d3436;
+    margin-bottom: 30px;
+}
+
+#modal-username-input {
+    width: 100%;
+    max-width: 320px;
+    padding: 15px;
+    font-size: 1.1em;
+    border: 2px solid #ff286f;
+    border-radius: 12px;
+    outline: none;
+}
+
+/* ==================== iOS-STYLE BOTTOM NAVIGATION ==================== */
+.chat-navigation {
+    height: 80px;
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid #ddd;
+    backdrop-filter: blur(30px);
+    border-radius: 30px 30px 0 0;   /* Очень сильное закругление */
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
+    margin: 0 10px 10px 10px;
+    width: calc(100% - 20px);
+}
+
+/* ==================== BOTTOM NAVIGATION (только верхнее закругление) ==================== */
+.chat-navigation {
+    height: 80px;
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid #ddd;
+    backdrop-filter: blur(30px);
+    border-radius: 28px 28px 0 0;     /* Сильно закруглено ТОЛЬКО сверху */
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    margin: 0 8px 0 8px;              /* убрал отступ снизу */
+    width: calc(100% - 16px);
+}
+
+/* ==================== FULL SCREEN USERNAME MODAL ==================== */
+.username-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 10000;
+    display: flex;
+    align-items: flex-end;
+}
+
+.modal-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(30px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #f0f0f0;
+    z-index: 2;
+    border-radius: 0; /* шапка остаётся прямой */
+}
+
+.modal-btn {
+    background: rgba(255, 40, 111, 0.1);
+    border: none;
+    font-size: 1.08em;
+    font-weight: 600;
+    padding: 10px 26px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.modal-btn.cancel { color: #ff286f; }
+.modal-btn.save { 
+    color: #ff286f; 
+    font-weight: 700; 
+    background: rgba(255, 40, 111, 0.18);
+}
+
+.modal-btn:hover {
+    background: rgba(255, 40, 111, 0.28);
+}
+
+.modal-body {
+    background: white;
+    width: 100%;
+    height: calc(100% - 70px);
+    border-radius: 32px 32px 0 0;     /* Сильно закруглено ТОЛЬКО сверху */
+    padding: 70px 20px 40px;
+    text-align: center;
+    box-shadow: 0 -15px 40px rgba(0,0,0,0.15);
+}
+
+.modal-body {
+    background: white;
+    width: 100%;
+    height: calc(100% - 70px);
+    border-radius: 40px 40px 0 0;     /* Сделал сильнее закругление сверху */
+    padding: 80px 20px 40px;
+    text-align: center;
+    box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.18);
+    margin-top: 1px; /* маленький отступ для чистоты */
+}
+
+#modal-username-input {
+    width: 100%;
+    max-width: 340px;
+    padding: 18px 20px;
+    font-size: 1.2em;
+    border: 2px solid #ff286f;
+    border-radius: 16px;
+    outline: none;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+/* Убираем зазор между header и body */
+.username-modal {
+    align-items: flex-start;
+}
+
+.modal-body {
+    background: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;                    /* Убираем закругление сверху */
+    padding: 90px 20px 40px;
+    text-align: center;
+    box-shadow: none;
+    margin-top: 70px;                    /* Поднимаем под header */
+}
+
+/* Подсказки под полем */
+.username-hints {
+    margin-top: 30px;
+    font-size: 0.95em;
+    color: #666;
+    line-height: 1.5;
+}
+
+.username-hints p {
+    margin: 8px 0;
+}
+
+.profile-link {
+    color: #ff286f;
+    font-weight: 500;
+}
+
+/* Поле ввода */
+#modal-username-input {
+    width: 100%;
+    max-width: 340px;
+    padding: 18px 20px;
+    font-size: 1.2em;
+    border: 2px solid #ff286f;
+    border-radius: 16px;
+    outline: none;
+    margin: 0 auto 15px;
+    display: block;
+}
+
+/* Убираем зазор между header и body */
+.username-modal {
+    align-items: flex-start;
+}
+
+.modal-body {
+    background: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;                    /* Убираем закругление сверху */
+    padding: 90px 20px 40px;
+    text-align: center;
+    box-shadow: none;
+    margin-top: 70px;                    /* Поднимаем под header */
+}
+
+/* Подсказки под полем */
+.username-hints {
+    margin-top: 30px;
+    font-size: 0.95em;
+    color: #666;
+    line-height: 1.5;
+}
+
+.username-hints p {
+    margin: 8px 0;
+}
+
+.profile-link {
+    color: #ff286f;
+    font-weight: 500;
+}
+
+/* Поле ввода */
+#modal-username-input {
+    width: 100%;
+    max-width: 340px;
+    padding: 18px 20px;
+    font-size: 1.2em;
+    border: 2px solid #ff286f;
+    border-radius: 16px;
+    outline: none;
+    margin: 0 auto 15px;
+    display: block;
+}
+
+/* Блок чата с ботом */
+.system-bot {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+}
+
+.bot-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.bot-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.bot-name-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.bot-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.ver-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.bot-desc {
+    font-size: 13px;
+    color: #888;
+    max-width: 200px; /* Чтобы переносился на 2 строки */
+    line-height: 1.2;
+}
+
+/* Обеспечиваем скроллинг списка чатов */
+#chat-list-container {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 1. Настройка шапки */
+.chat-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.logo-text {
+    font-weight: 800;
+    font-size: 22px;
+    color: #ff286f; /* Розовый цвет */
+    margin-right: 15px;
+    white-space: nowrap;
+}
+
+#input-search {
+    flex: 1;
+    height: 40px;
+    padding: 0 15px;
+    border-radius: 20px;
+    border: none;
+    background: #f4f4f9;
+}
+
+/* 2. Контейнер списка (скролл) */
+#chat-list-container {
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+    background: white;
+}
+
+/* 3. Карточка бота */
+.system-bot {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.bot-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.bot-name { font-weight: bold; }
+.ver-icon { width: 14px; height: 14px; margin-left: 5px; }
+.bot-desc { font-size: 13px; color: #888; }
+
+/* Шапка чата */
+.chat-window-header {
+    height: 60px; background: white; display: flex; align-items: center; padding: 0 15px; border-bottom: 1px solid #ddd;
+}
+.back-btn {
+    background: #ff286f; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; margin-right: 10px; font-weight: bold;
+}
+.chat-header-avatar { width: 35px; height: 35px; border-radius: 50%; margin-right: 10px; }
+.chat-header-name { font-weight: bold; margin-right: 5px; }
+
+/* Сообщения */
+.message-bubble {
+    background: white; padding: 12px 16px; border-radius: 18px; max-width: 80%; width: fit-content; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Нижнее меню */
+.chat-window-footer {
+    height: 70px; background: white; display: flex; align-items: center; padding: 0 10px; gap: 10px; border-top: 1px solid #ddd;
+}
+.footer-btn { background: none; border: none; width: 40px; }
+.footer-btn img { width: 100%; }
+.message-input { flex: 1; height: 45px; border-radius: 25px; border: 1px solid #ddd; padding: 0 15px; background: #f4f4f9; }
+
+.send-btn {
+    background: #ffffff; /* Розовый фон */
+    border: none;
+    border-radius: 50%; /* Идеально круглая */
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.send-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Сообщение пользователя (справа) */
+.message-bubble.my-message {
+    background: #ff286f; /* Розовый фон */
+    color: white;
+    margin-left: auto; /* Сдвигает сообщение вправо */
+    border-radius: 18px 18px 0 18px; /* Красивый "хвостик" */
+}
+
+.message-bubble {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 80%;
+    width: fit-content; /* Пузырь будет по ширине текста */
+    word-wrap: break-word; /* Перенос длинных слов */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column; /* Текст сверху, время снизу */
+    position: relative;
+    margin-bottom: 10px;
+}
+
+/* Время отправки */
+.message-time {
+    font-size: 10px;
+    color: #888; /* Темно-серый цвет */
+    align-self: flex-end; /* Прижимает к правому краю внутри пузыря */
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+/* Стиль для сообщения пользователя */
+.message-bubble.my-message {
+    background: #ff286f;
+    color: white;
+    margin-left: auto;
+}
+
+.message-bubble.my-message .message-time {
+    color: #ffdce8; /* Светлый оттенок для времени на розовом фоне */
+}
+
+/* Shake animation */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-12px); }
+    40% { transform: translateX(12px); }
+    60% { transform: translateX(-8px); }
+    80% { transform: translateX(8px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Красный текст ошибки */
+.username-hints .error {
+    color: #ff286f !important;
+    transition: color 0.5s ease;
+}
+
+/* Shake animation */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-12px); }
+    40% { transform: translateX(12px); }
+    60% { transform: translateX(-8px); }
+    80% { transform: translateX(8px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Красный текст ошибки */
+.username-hints .error {
+    color: #ff286f !important;
+    transition: color 0.5s ease;
+}
+
+/* ==================== PROFILE STYLES ==================== */
+.profile-banner-container {
+    position: relative;
+    height: 240px;
+    width: 100%;
+}
+
+.profile-banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0 0 24px 24px;
+}
+
+.profile-avatar-main {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 5px solid white;
+    position: absolute;
+    bottom: -50px;
+    left: 20px;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    cursor: pointer;
+}
+
+.profile-info {
+    padding: 75px 20px 30px;
+    flex: 1;
+}
+
+.username-display-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.bio-section {
+    margin-top: 20px;
+    background: white;
+    padding: 18px;
+    border-radius: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+}
+
+.bio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.bio-title {
+    font-weight: 600;
+    color: #555;
+}
+
+.bio-text {
+    color: #333;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Стили модального окна Bio */
+#modal-bio-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1.05em;
+    border: 2px solid #ff286f;
+    border-radius: 12px;
+    outline: none;
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* ==================== WELCOME SCREEN ==================== */
+.welcome-screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, #ff286f, #9b59b6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: all 0.8s ease;
+}
+
+.welcome-logo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+.sparkle-title {
+    font-size: 3.2em;
+    font-weight: 800;
+    color: white;
+    margin: 0;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.welcome-subtitle {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.1em;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.start-btn {
+    background: white;
+    color: #ff286f;
+    border: none;
+    padding: 18px 50px;
+    font-size: 1.2em;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* ==================== FIRST WELCOME SCREEN ==================== */
+.first-welcome-screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    transition: opacity 0.6s ease;
+}
+
+.first-logo {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.sparkle-title {
+    font-size: 3em;
+    font-weight: 800;
+    color: #2d3436;
+    margin: 0 0 12px 0;
+}
+
+.welcome-desc {
+    color: #636e72;
+    font-size: 1.1em;
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.start-btn {
+    background: #ff286f;
+    color: white;
+    border: none;
+    padding: 18px 55px;
+    font-size: 1.25em;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(255, 40, 111, 0.3);
+    transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(255, 40, 111, 0.4);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-12px); }
+    40%, 80% { transform: translateX(12px); }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* ==================== SETUP PROFILE VIEW ==================== */
+#setup-profile-view {
+    padding: 40px;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    width: 100%;
+}
+
+.setup-avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.setup-title {
+    color: #2d3436;
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.setup-input-wrapper {
+    width: 100%;
+    max-width: 320px;
+}
+
+.pink-input {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 1.2em;
+    border: 2px solid #ff286f;
+    border-radius: 16px;
+    outline: none;
+    color: #2d3436;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.setup-hint {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.setup-hint.error {
+    color: #ff286f;
+    font-weight: bold;
+}
+
+/* ==================== ДИНАМИЧЕСКИЙ ПОИСК И ВКЛАДКИ ==================== */
+.search-container {
+    padding: 10px 15px;
+    background: #ffffff;
+}
+
+#chat-search-input {
+    width: 100%;
+    padding: 12px 18px;
+    border: 2px solid #f0f0f0;
+    border-radius: 24px;
+    font-size: 1em;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#chat-search-input:focus {
+    border-color: #ff286f;
+    background: #fff5f8;
+}
+
+/* Новая всплывающая менюшка поиска */
+#search-overlay {
+    position: absolute;
+    top: 130px; /* Отрегулируй этот параметр под высоту твоей шапки чата */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff;
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Контейнер вкладок */
+.search-tabs {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    border-bottom: 1px solid #f5f5f5;
+    background: #ffffff;
+}
+
+.search-tab {
+    font-size: 0.95em;
+    font-weight: 700;
+    color: #b2bec3;
+    cursor: pointer;
+    padding: 5px 20px;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.search-tab.active {
+    color: #ff286f;
+}
+
+/* Анимированная розовая полоса под текстом */
+.search-tab-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: #ff286f;
+    width: 50%; /* Так как вкладки две, ширина ровно половина */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(0);
+}
+
+/* Список результатов поиска */
+.search-results-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    background: #fafafa;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 16px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.search-result-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    border: 2px solid #fff5f8;
+}
+
+.search-result-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-result-name {
+    font-weight: 700;
+    color: #2d3436;
+    font-size: 1.05em;
+}
+
+.search-result-bio {
+    font-size: 0.88em;
+    color: #636e72;
+    margin-top: 3px;
+}
+
+/* Стили элемента списка чатов (копия структуры бота) */
+.user-chat-card {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid #f8f9fa;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    position: relative;
+    user-select: none;
+}
+
+.user-chat-card:active {
+    background: #f1f2f6; /* Эффект при клике на телефоне */
+}
+
+.user-avatar-wrapper {
+    position: relative;
+    margin-right: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.user-dynamic-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #dfe6e9;
+}
+
+.user-info-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.user-dynamic-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-dynamic-bio {
+    font-size: 11px;
+    color: #b2bec3;
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+}
+
+.user-dynamic-lastmsg {
+    font-size: 13px;
+    color: #636e72;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 95%;
+}
+
+/* Счетчик непрочитанных */
+.user-chat-badge {
+    background: #ff286f;
+    color: white;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 0 5px;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Контейнер для сообщений должен быть флексом */
+#chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+/* Общий стиль пузыря */
+.message-bubble {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 75%;
+    font-size: 14px;
+    background: #e9ecef; /* Цвет собеседника (слева) */
+    color: #2d3436;
+    align-self: flex-start; /* Прижимает к левому краю */
+}
+
+/* Твой пузырь (справа) */
+.message-bubble.my-message {
+    background: #ff286f; /* Розовый цвет */
+    color: white;
+    align-self: flex-end; /* Прижимает к правому краю */
+}
+
+/* Скрываем всё, чтобы они не перекрывали друг друга */
+#first-welcome, #login-view, #verify-view, #setup-profile-view, #chat-view {
+    display: none; 
+}
+
+/* ==================== ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ ПРОФИЛЯ ==================== */
+.slide-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f4f4f9;
+    z-index: 3000;
+    
+    /* ПАНЕЛЬ ВСЕГДА ВКЛЮЧЕНА, ИНАЧЕ АНИМАЦИЯ СЛОМАЕТСЯ */
+    display: flex; 
+    flex-direction: column;
+    
+    /* Спрятана за правым краем экрана */
+    transform: translateX(100%); 
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+}
+
+/* Класс, который JS будет добавлять для выезда панели */
+.slide-panel.active {
+    /* Выезжает на нулевую координату */
+    transform: translateX(0); 
+}
+
+.slide-header {
+    height: 60px;
+    background: rgba(255, 255, 255, 0.98);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+.slide-back-btn {
+    background: none;
+    border: none;
+    color: #ff286f;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 0;
+}
+
+/* --- СТАТУСЫ В ЧАТЕ --- */
+.header-text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+#chat-status {
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Светло-синий для обычного онлайна */
+.status-online { color: #00a8ff; } 
+
+/* Зеленый, когда собеседник прямо сейчас в чате с тобой */
+.status-in-chat { color: #4cd137; } 
+
+/* Ярко-красный для времени последнего визита */
+.status-last-seen { color: #ff4757; } 
+
+/* Анимация и стиль для статуса "печатает..." */
+.status-typing { 
+    color: #dd0a6d; 
+    font-style: italic; 
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* Зеленый для обычного онлайна */
+.status-online { color: #4cd137; } 
+
+/* Светло-синий, когда собеседник прямо сейчас в чате с тобой */
+.status-in-chat { color: #00a8ff; } 
+
+/* Ярко-красный для времени последнего визита и offline */
+.status-last-seen, .status-offline { color: #ff4757; }
+
+/* Кнопки в шапке чата */
+.header-call-buttons { margin-left: auto; display: flex; gap: 15px; margin-right: 10px; }
+.call-icon-btn { width: 28px; height: 28px; cursor: pointer; transition: transform 0.2s; border-radius: 50%; }
+.call-icon-btn:active { transform: scale(0.9); }
+
+/* Экран звонка */
+.call-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: #000; overflow: hidden;
+}
+.call-bg-blur {
+    position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
+    background-size: cover; background-position: center; filter: blur(30px) brightness(0.4); z-index: 1;
+}
+.call-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; margin-bottom: auto; margin-top: 15dvh; }
+.call-avatar { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 20px; }
+.call-name { color: white; font-size: 2em; font-weight: 700; margin-bottom: 5px; }
+.call-status { color: rgba(255,255,255,0.7); font-size: 1.2em; letter-spacing: 1px; }
+
+/* Кнопки звонка */
+.call-buttons-bar { position: relative; z-index: 2; display: flex; gap: 20px; margin-bottom: 10dvh; }
+.call-btn {
+    width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); transition: transform 0.2s; position: relative; overflow: hidden;
+}
+.call-btn:active { transform: scale(0.9); }
+.call-btn img { width: 30px; height: 30px; object-fit: contain; }
+.btn-round img { border-radius: 12px; }
+.btn-pink { background: #ff286f; box-shadow: 0 4px 15px rgba(255,40,111,0.4); }
+.btn-text-icon { font-size: 28px; font-weight: bold; color: white; }
+
+/* Анимация микрофона */
+.mic-strike-line {
+    position: absolute; top: 15%; left: 85%; width: 4px; height: 0%; background: #ff4757;
+    transform: rotate(45deg); transform-origin: top left; transition: height 0.3s ease; border-radius: 2px;
+}
+.btn-mic.muted .mic-strike-line { height: 100%; }
+
+/* Тост (Входящий звонок) */
+.incoming-toast {
+    position: fixed; top: -120px; left: 5%; width: 90%; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+    border-radius: 20px; padding: 15px; display: flex; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 10000; transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.incoming-toast.show { top: 20px; }
+.incoming-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 15px; }
+.incoming-info { flex: 1; display: flex; flex-direction: column; }
+.incoming-name { font-weight: bold; font-size: 16px; color: #2d3436; }
+.incoming-status { font-size: 13px; color: #ff286f; }
+.incoming-actions { display: flex; gap: 10px; }
+.incoming-btn { width: 40px; height: 40px; border-radius: 50%; border: none; font-size: 18px; color: white; cursor: pointer; }
+.btn-accept { background: #4cd137; }
+.btn-decline { background: #dfe6e9; color: #2d3436; }
+
+/* Меню приглашения */
+.invite-menu {
+    position: absolute; bottom: 120px; width: 90%; max-height: 50%; background: white; border-radius: 20px; padding: 20px; z-index: 3;
+    display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+.invite-list { overflow-y: auto; flex: 1; margin-bottom: 10px; }
+.close-invite-btn { background: #f1f2f6; border: none; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; }
+/* Экран звонка: Выезд снизу вверх */
+.call-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh;
+    z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: #000; overflow: hidden;
+    transform: translateY(100%); /* Спрятано ВНИЗУ экрана */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0; pointer-events: none;
+}
+.call-overlay.active {
+    transform: translateY(0); /* Вылетает на экран */
+    opacity: 1; pointer-events: all;
+}
+
+/* Сплит-скрин фона */
+.call-bg-container {
+    position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
+    display: flex; z-index: 1;
+}
+.call-bg-blur {
+    flex: 1; background-size: cover; background-position: center; filter: blur(30px) brightness(0.4);
+}
+
+/* Сплит-скрин Аватарки */
+.avatar-split-container {
+    width: 140px; height: 140px; border-radius: 50%; overflow: hidden;
+    border: 4px solid rgba(255,255,255,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-bottom: 20px; display: flex;
+}
+.call-avatar-half {
+    flex: 1; height: 100%; object-fit: cover;
+}
+
+/* Уведомление об отключенном микрофоне */
+.mic-mute-toast {
+    position: absolute; top: 30px; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+    color: white; padding: 10px 20px; border-radius: 30px; font-weight: 600;
+    z-index: 10; animation: fadeInDown 0.3s ease;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Кнопка сброса (красная) */
+.call-btn.btn-red { background: #ff4757; color: white; box-shadow: 0 4px 15px rgba(255,71,87,0.4); }
+
+/* Тост (Входящий звонок) - Моментальный вылет сверху */
+.incoming-toast {
+    position: fixed; top: -120px; left: 5%; width: 90%; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+    border-radius: 20px; padding: 15px; display: flex; align-items: center; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    z-index: 100000; transition: top 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.incoming-toast.show { top: 20px; }
+
+/* Кнопки в тосте */
+.incoming-actions { display: flex; gap: 10px; }
+.incoming-btn { width: 45px; height: 45px; border-radius: 50%; border: none; font-size: 20px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+.incoming-btn:active { transform: scale(0.9); }
+
+.btn-accept { background: #ff286f; color: white; box-shadow: 0 4px 10px rgba(255,40,111,0.3); } /* Розовая */
+.btn-decline { background: white; color: #ff286f; border: 2px solid #ff286f; } /* Белая */
+
+/* ==================== ВИДЕОЗВОНКИ И PIP ==================== */
+.video-main {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 1; transition: all 0.4s ease;
+}
+
+.video-pip {
+    position: absolute; bottom: 120px; right: 20px; width: 110px; height: 160px;
+    border-radius: 16px; object-fit: cover; border: 2px solid white;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5); z-index: 3; cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.video-header {
+    position: absolute; top: 50px; left: 0; width: 100%; text-align: center; z-index: 3;
+}
+
+/* Анимация зачеркивания (универсальная) */
+.btn-round.muted .mic-strike-line { height: 100%; }
+
+/* ==================== ИСТОРИЯ ЗВОНКОВ В ЧАТЕ ==================== */
+.call-log-bubble {
+    width: 100%; max-width: 260px; padding: 12px; border-radius: 20px;
+    background: #ffffff; border: 1px solid #f0f0f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    display: flex; align-items: center; cursor: pointer; margin-bottom: 10px;
+    transition: transform 0.2s;
+}
+.call-log-bubble:active { transform: scale(0.95); }
+
+.call-log-icon {
+    width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; 
+    justify-content: center; margin-right: 15px; font-size: 22px; flex-shrink: 0;
+}
+.call-log-icon.success { background: rgba(76, 209, 55, 0.15); }
+.call-log-icon.canceled { background: rgba(255, 71, 87, 0.15); }
+
+.call-log-details { display: flex; flex-direction: column; }
+.call-log-title { font-weight: 800; font-size: 15px; margin-bottom: 2px; }
+.call-log-duration { font-size: 12px; color: #888; font-weight: 500; }
+.call-log-title.success { color: #4cd137; }
+.call-log-title.canceled { color: #ff4757; }
+
+/* ==================== ЗВОНКИ: ФУНДАМЕНТ ==================== */
+.layer-fullscreen {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.call-buttons-bar { 
+    position: absolute; 
+    bottom: 30px; 
+    left: 0; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    gap: 20px; 
+}
+
+/* Блокировка кнопок до ответа */
+.locked-precall.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    transform: scale(0.95);
+}
+
+.shadow-text { text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+
+/* ==================== ВИДЕО И PIP ОБОЛОЧКИ ==================== */
+.video-main-wrapper {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1; transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.video-main-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+
+.video-pip-wrapper {
+    position: absolute; bottom: 120px; right: 20px; width: 110px; height: 160px;
+    border-radius: 16px; border: 2px solid white; box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    z-index: 3; cursor: pointer; overflow: hidden;
+    transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.video-pip-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+
+/* ==================== ФАЛЛБЭКИ (АВАТАР НА БЛЮРЕ) ==================== */
+.video-fallback {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center; z-index: 2;
+    background: #000; overflow: hidden;
+}
+.fallback-bg-blur {
+    position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
+    background-size: cover; background-position: center; filter: blur(25px) brightness(0.5);
+}
+.fallback-avatar {
+    position: relative; z-index: 3; border-radius: 50%; object-fit: cover;
+    border: 3px solid rgba(255,255,255,0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+/* Размеры аватарки зависят от того, где она (Main или PiP) */
+.video-main-wrapper .fallback-avatar { width: 140px; height: 140px; }
+.video-pip-wrapper .fallback-avatar { width: 60px; height: 60px; }
+
+/* ==================== ПАУЗА ЭКРАНА ==================== */
+.paused-blur { filter: blur(15px) grayscale(50%); transition: filter 0.5s ease; }
+
+/* Центрирование контента в аудио-звонке */
+#call-audio-layer {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Принудительное центрирование контейнера с аватарками */
+.avatar-split-container {
+    margin: 0 auto 20px auto;
+}
+
+.call-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ==================== ПЕРЕКЛЮЧАТЕЛЬ ПРИВАТНОСТИ (TOGGLE) ==================== */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 30px;
+    flex-shrink: 0;
+}
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #dfe6e9;
+    transition: .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 34px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* ФИОЛЕТОВЫЙ ЦВЕТ ДЛЯ ВКЛЮЧЕННОГО СОСТОЯНИЯ */
+input:checked + .slider.purple {
+    background-color: #ff0055; 
+}
+input:checked + .slider.purple:before {
+    transform: translateX(24px);
+}
+
+/* Блоки статистики */
+.stats-container {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+.stat-block {
+    flex: 1;
+    background: #f0f0f0;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    position: relative;
+}
+.stat-title {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 4px;
+}
+.stat-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d3436;
+}
+
+/* Фиолетовый тумблер */
+.toggle-switch {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: inline-block;
+    width: 30px;
+    height: 16px;
+}
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 16px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px; width: 12px;
+    left: 2px; bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: #f50f5c; /* Тот самый фиолетовый цвет */
+}
+input:checked + .slider:before {
+    transform: translateX(14px);
+}
+
+/* Кастомный фиолетовый ползунок (Toggle) для Sparkle */
+.sparkle-switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.sparkle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.sparkle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #dcdde1;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.sparkle-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Фиолетовый цвет при включении */
+input:checked + .sparkle-slider {
+    background-color: #ff2580; 
+}
+
+input:checked + .sparkle-slider:before {
+    transform: translateX(20px);
+}
+
+/* Основной контейнер профиля */
+#profile-view {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh; /* Высота на весь экран */
+    background: white;
+    overflow: hidden; /* Важно: отключаем скролл для всего контейнера */
+}
+
+/* Обертка для контента внутри профиля (все, что должно листаться) */
+.profile-scroll-wrapper {
+    flex: 1; /* Занимает всё пространство между шапкой и футером */
+    overflow-y: auto; /* Включает прокрутку только для этого блока */
+    padding-bottom: 20px; /* Небольшой отступ внизу */
+    -webkit-overflow-scrolling: touch; /* Плавный скролл для iOS */
+}
+
+/* Если у тебя есть фиксированная шапка внутри профиля */
+.profile-header-fixed {
+    flex-shrink: 0; /* Не сжимается и не прокручивается */
+}
+
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background: #ffffff; /* Цвет фона экрана загрузки */
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease; /* Плавное исчезновение */
+}
+
+#splash-logo {
+    width: 100px; /* Размер твоего лого */
+    height: 100px;
+    animation: drop-and-spin 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+#splash-text {
+    color: #ff286f; /* Фирменный розовый */
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-top: 20px;
+    opacity: 0;
+    animation: show-text 0.5s ease-in 1.3s forwards; /* Появляется в конце анимации */
+}
+
+@keyframes drop-and-spin {
+    0% { transform: translateY(-100vh) rotate(0deg); }
+    100% { transform: translateY(0) rotate(360deg); }
+}
+
+@keyframes show-text {
+    to { opacity: 1; }
+}
+
+
+/* ==================== ПОСТЫ И КОММЕНТАРИИ ==================== */
+
+/* Кнопка создания сторис в шапке */
+.add-story-btn {
+    background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+}
+.add-story-plus {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #ff286f; color: white;
+    font-size: 24px; font-weight: bold; line-height: 30px; text-align: center;
+    box-shadow: 0 4px 10px rgba(255, 40, 111, 0.3);
+}
+
+/* Розовая обводка (Сторис есть) */
+.has-story {
+    border: 3px solid #ff286f !important;
+    padding: 2px;
+    background: white;
+}
+
+/* Контейнер вкладок профиля */
+.profile-tabs-container { width: 100%; margin-top: 25px; background: white; }
+.profile-tabs {
+    display: flex; justify-content: space-around; position: relative;
+    border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 15px;
+}
+.profile-tab {
+    font-weight: 700; color: #b2bec3; font-size: 1.1em;
+    cursor: pointer; transition: color 0.3s; flex: 1; text-align: center;
+}
+.profile-tab.active { color: #ff286f; }
+.profile-tab-line {
+    position: absolute; bottom: 0; left: 0;
+    height: 3px; background: #ff286f; width: 50%;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 3px 3px 0 0;
+}
+
+/* Зона ввода комментария */
+.comment-input-area {
+    display: flex; align-items: center; gap: 10px;
+    background: #f9f9fb; padding: 10px; border-radius: 25px;
+    margin-bottom: 20px;
+}
+#new-comment-input {
+    flex: 1; border: none; background: transparent;
+    outline: none; font-size: 1em; padding: 0 10px;
+}
+.comment-btn-circle {
+    width: 36px; height: 36px; border-radius: 50%; border: none;
+    display: flex; align-items: center; justify-content: center;
+    background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); cursor: pointer;
+}
+.comment-btn-circle img { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; }
+.pink-btn { background: #ff286f; }
+
+/* Список комментариев */
+.comments-list { display: flex; flex-direction: column; gap: 12px; }
+.comment-bubble {
+    background: #f4f4f9; padding: 12px 16px; border-radius: 18px;
+    width: fit-content; max-width: 90%; align-self: flex-start;
+}
+.comment-author { font-weight: 700; font-size: 0.85em; color: #ff286f; margin-bottom: 3px; display: block; }
+.comment-text { color: #2d3436; font-size: 1em; word-break: break-word; }
+
+/* Сетка постов (Сторис) */
+.posts-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%;
+}
+.post-thumbnail {
+    width: 100%; aspect-ratio: 1 / 1; border-radius: 12px;
+    object-fit: cover; background: #eee; cursor: pointer;
+}
+
+/* Оверлей Сторис */
+.story-viewer-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh;
+    background: #000; z-index: 100000; display: flex; flex-direction: column;
+}
+.story-media { width: 100%; height: 100%; object-fit: cover; }
+.story-progress-container {
+    position: absolute; top: 15px; left: 10px; right: 10px;
+    height: 3px; background: rgba(255,255,255,0.3); border-radius: 3px; z-index: 2;
+}
+.story-progress-bar { height: 100%; background: #ff286f; width: 0%; border-radius: 3px; }
+.story-close-btn {
+    position: absolute; top: 30px; right: 20px; background: rgba(255,40,111,0.8);
+    color: white; border: none; width: 35px; height: 35px; border-radius: 50%;
+    font-size: 18px; font-weight: bold; z-index: 2; cursor: pointer;
+}
+.story-post-btn {
+    position: absolute; bottom: 30px; right: 20px; background: #ff286f;
+    color: white; border: none; padding: 15px 35px; border-radius: 30px;
+    font-size: 18px; font-weight: bold; z-index: 2; cursor: pointer; box-shadow: 0 5px 15px rgba(255,40,111,0.5);
+}
+.story-footer {
+    position: absolute; bottom: 30px; left: 0; width: 100%;
+    display: flex; justify-content: space-around; padding: 0 20px; z-index: 2;
+}
+.story-stat-bubble {
+    background: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 25px;
+    display: flex; align-items: center; gap: 8px; font-size: 16px; color: #2d3436; cursor: pointer;
+}
+.story-like-icon { width: 22px; height: 22px; transition: transform 0.2s; }
+.story-like-icon.liked { filter: hue-rotate(320deg) saturate(300%); transform: scale(1.1); }
+
+/* ИСПРАВЛЕНИЕ ШАПКИ ЧАТОВ (Плюсик уходит вправо) */
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Расставляет элементы по краям */
+    padding: 10px 20px;
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+    height: 60px;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+/* ИСПРАВЛЕНИЕ СПИСКА КОММЕНТАРИЕВ (Скролл и лимит высоты) */
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 400px; /* Максимальная высота перед появлением скролла */
+    overflow-y: auto;  /* Включает прокрутку */
+    padding-right: 5px; /* Отступ для полосы прокрутки */
+    width: 100%;
+}
+
+/* АНИМАЦИЯ И ПОЗИЦИЯ ПРОСМОТРА СТОРИС */
+.story-viewer-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh;
+    background: #000; z-index: 100000; 
+    display: none; /* Скрыто по умолчанию */
+    flex-direction: column;
+    
+    /* Анимация масштаба */
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.story-viewer-overlay.show-story {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* РОЗОВАЯ ОБВОДКА (Круг сторис) */
+.has-story {
+    border: 3px solid #ff286f !important;
+    padding: 2px;
+    background: white;
+}
+
+/* ==================== ПУСТЫЕ ПОСТЫ (АНИМАЦИЯ ЗНАКА ВОПРОСА) ==================== */
+.empty-posts-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+    width: 100%;
+}
+
+.empty-question-mark {
+    font-size: 90px;
+    font-weight: 900;
+    color: #ff286f;
+    line-height: 1;
+    margin-bottom: 15px;
+    opacity: 0;
+    transform: scale(0.2) translateY(50px) rotate(-180deg);
+}
+
+.empty-posts-state p {
+    font-weight: 700;
+    color: #b2bec3;
+    font-size: 1.15em;
+    margin: 0;
+}
+
+/* Класс запускает ту самую анимацию */
+.animate-question {
+    animation: fly-and-spin-question 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes fly-and-spin-question {
+    0% { opacity: 0; transform: scale(0.2) translateY(50px) rotate(-180deg); }
+    100% { opacity: 1; transform: scale(1) translateY(0) rotate(0deg); }
+}
+
+/* ==================== ИСПРАВЛЕНИЯ ДИЗАЙНА СТОРИС И КОММЕНТАРИЕВ ==================== */
+
+/* Кнопка ПЛЮС в шапке (Белая снаружи, розовая внутри) */
+.add-story-plus {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #ffffff; color: #ff286f;
+    border: 2px solid #ff286f;
+    font-size: 24px; font-weight: bold; line-height: 26px; text-align: center;
+    box-shadow: 0 4px 10px rgba(255, 40, 111, 0.15);
+    transition: transform 0.2s;
+}
+.add-story-plus:active { transform: scale(0.9); }
+
+/* Модалки сторис поверх ВСЕГО */
+.story-viewer-overlay {
+    z-index: 999999 !important; /* Гарантирует, что окно не спрячется под чатами */
+    background: #000;
+}
+
+/* Розовый крестик в верхнем левом углу */
+.story-close-btn.left-side {
+    right: auto;
+    left: 20px;
+    background: #ff286f; /* Розовый фон */
+    color: white;
+}
+
+/* Розовые закругленные кнопки Views и Likes */
+.story-stat-bubble {
+    background: #ff286f !important;
+    color: white !important;
+    border-radius: 30px;
+    padding: 10px 25px;
+    box-shadow: 0 5px 15px rgba(255, 40, 111, 0.4);
+}
+.story-stat-bubble span {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Списки комментариев (Высота и пустой стейт) */
+.comments-list {
+    min-height: 250px; /* Достаточно большой блок */
+    max-height: 400px; /* Лимит, после которого можно листать */
+    overflow-y: auto;
+    width: 100%;
+}
+
+/* ==================== АНИМАЦИЯ И ПОЗИЦИЯ СТОРИС (ИСПРАВЛЕНО ЗАВИСАНИЕ) ==================== */
+.story-viewer-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh;
+    background: #000; z-index: 100000; 
+    display: none; 
+    flex-direction: column;
+    
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* ИСПРАВЛЕНИЕ ЗАВИСАНИЯ: Если блок прозрачный, он пропускает клики сквозь себя */
+    pointer-events: none; 
+}
+
+.story-viewer-overlay.show-story {
+    transform: scale(1);
+    opacity: 1;
+    /* Когда блок видим, он ловит клики */
+    pointer-events: auto; 
+}
+
+/* ==================== МАЛЕНЬКИЕ РОЗОВЫЕ КНОПКИ СПРАВА ВНИЗУ ==================== */
+.story-footer {
+    position: absolute;
+    bottom: 25px;
+    right: 20px;       /* Прижимаем вправо */
+    left: auto;        /* Убираем растяжение по ширине */
+    width: auto;
+    display: flex;
+    flex-direction: column; /* Кнопки друг над другом */
+    gap: 12px;
+    padding: 0;
+    z-index: 999999;
+}
+
+.story-stat-bubble {
+    background: #ff286f !important;
+    color: white !important;
+    border-radius: 20px;
+    padding: 8px 16px; /* Маленькие отступы */
+    font-size: 13px;   /* Маленький шрифт */
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(255, 40, 111, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Выравнивание текста вправо */
+    gap: 8px;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+}
+
+.story-stat-bubble span {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.story-like-icon { 
+    width: 18px; 
+    height: 18px; 
+    transition: transform 0.2s; 
+}
+
+/* ==================== УДАЛЕНИЕ КОММЕНТАРИЕВ И СТОРИС ==================== */
+
+/* Обертка комментария, чтобы иконка стояла рядом */
+.comment-bubble-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 90%;
+}
+
+.comment-bubble {
+    flex: 1;
+    max-width: 100% !important; /* Убираем старый лимит, т.к. лимитирует обертка */
+}
+
+/* Красный текст для удаляющегося комментария */
+.comment-text-pending {
+    color: #ff4757 !important;
+}
+
+/* Кнопки рядом с комментариями */
+.comment-action-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: contain;
+    cursor: pointer;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 6px;
+    flex-shrink: 0;
+}
+
+/* АНИМАЦИЯ ПЕСОЧНЫХ ЧАСОВ (Переворот, пауза 1 сек, переворот) */
+.waiting-anim {
+    cursor: default;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    animation: hourglass-flip 2s infinite ease-in-out;
+}
+
+@keyframes hourglass-flip {
+    0% { transform: rotate(0deg); }
+    40% { transform: rotate(180deg); } /* Быстро перевернулись */
+    50% { transform: rotate(180deg); } /* Ждем 1 секунду */
+    90% { transform: rotate(360deg); } /* Опять перевернулись */
+    100% { transform: rotate(360deg); } /* Ждем 1 секунду */
+}
+
+/* Обертка поста для позиционирования корзины */
+.post-thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+/* Белая закругленная корзина на постах */
+.post-delete-btn {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: transform 0.2s;
+}
+
+.post-delete-btn:active {
+    transform: scale(0.9);
+}
+
+.post-delete-btn img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}

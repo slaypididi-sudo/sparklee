@@ -1,0 +1,73 @@
+[
+  {
+    "phone": "+0656555555555",
+    "firstName": "Солоденька масна",
+    "lastName": "Гузныця",
+    "username": "gyzno",
+    "bio": "Очко",
+    "joinDate": 1783777019366,
+    "totalReadTime": 0,
+    "readMessageCount": 0,
+    "hideAnswerTime": false,
+    "sessionToken": "igbovtu85o1783777019366",
+    "lastSeen": 1783777286097
+  },
+  {
+    "phone": "+4915226767520",
+    "firstName": "СПАРКЛ",
+    "lastName": "РОССИЯ",
+    "username": "sparkle-ru",
+    "bio": "sparkle-ru. accont",
+    "joinDate": 1783777039594,
+    "totalReadTime": 0,
+    "readMessageCount": 0,
+    "hideAnswerTime": false,
+    "sessionToken": "9059qr95qwg1783777039594",
+    "lastSeen": 1783854915350,
+    "avatarUrl": "/uploads/4915226767520_avatar.jpg?t=1783791505727",
+    "bannerUrl": "/uploads/4915226767520_banner.webp?t=1783791950249"
+  },
+  {
+    "phone": "+4915226767521",
+    "firstName": "a4 official",
+    "lastName": "look at the bio 100 char",
+    "username": "error",
+    "bio": "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "joinDate": 1783777039594,
+    "totalReadTime": 3,
+    "readMessageCount": 5,
+    "hideAnswerTime": false,
+    "sessionToken": "9059qr95qwg1783777139594",
+    "lastSeen": 1783851511968
+  },
+  {
+    "phone": "+0111111111111",
+    "firstName": "Jasmina",
+    "lastName": "Johnsohn",
+    "username": "jasumq",
+    "bio": "developer account⭐️💥",
+    "joinDate": 1783781938144,
+    "totalReadTime": 0,
+    "readMessageCount": 0,
+    "hideAnswerTime": false,
+    "sessionToken": "es5zku86qqs1783781938144",
+    "lastSeen": 1783857279335,
+    "avatarUrl": "/uploads/0111111111111_avatar.jpg?t=1783786436998",
+    "bannerUrl": "/uploads/0111111111111_banner.jpg?t=1783786447915"
+  },
+  {
+    "phone": "+0666666666666",
+    "firstName": "МАРАНА",
+    "lastName": "СУКА",
+    "username": "AnatolIiRUKS",
+    "bio": "fear is music to my ear",
+    "joinDate": 1783848103680,
+    "totalReadTime": 0,
+    "readMessageCount": 0,
+    "hideAnswerTime": false,
+    "sessionToken": "29xbtwintd41783848103680",
+    "avatarUrl": "/uploads/0666666666666_avatar.jpg?t=1783848149769",
+    "bannerUrl": "/uploads/0666666666666_banner.png?t=1783848160406",
+    "lastSeen": 1783854686424
+  }
+]
